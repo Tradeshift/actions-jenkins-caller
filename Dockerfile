@@ -1,9 +1,9 @@
 FROM alpine:3.11.2 as builder
 
-RUN echo "Building up image for project template_project_name"
+RUN echo "Building up image for project actions-jenkins-caller"
 
-COPY . /template_project_name
+COPY . /actions-jenkins-caller
 
-WORKDIR /template_project_name
+WORKDIR /actions-jenkins-caller
 
 ENTRYPOINT echo "Hello world"

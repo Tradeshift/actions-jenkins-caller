@@ -1,7 +1,7 @@
-# template_project_name
+# actions-jenkins-caller
 
 #### About this project
-template_description  
+GH action for calling Jenkins jobs  
 
 #### Getting Started
 Tutorial on what it is needed for first execution, including softwares that must be pre-installed.
