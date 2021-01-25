@@ -1,0 +1,53 @@
+name: "Jenkins caller action"
+description: "Runs dockerised jenkins caller utility to be able to access Jenkins"
+inputs:
+  caCert:
+    description: MTLS cacert
+    required: true
+  clientCert:
+    description: MTLS client cert
+    required: true
+  clientKey:
+    description: MTLS client key
+    required: true
+  jenkinsToken:
+    description: Token to access jenkins job
+    required: true
+  jenkinsURL:
+    description: URL of the Jenkins server
+    required: true
+  jenkinsUser:
+    description: User to access Jenkins server
+    required: true
+  jenkinsPassword:
+    description: Password to access Jenkins server
+    required: true
+  jenkinsJob:
+    description: Name of the jenkins job
+    required: true
+  jenkinsJobOptions:
+    description: "Options of the jenkins job. ex: key1=val1,key2=val2"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - id: run-docker-action
+      shell: bash
+      run: |
+
+        params="--cert=/etc/jenkins-caller/client.cert"
+        params+=" --key=/etc/jenkins-caller/client.key"
+        params+=" --cacert=/etc/jenkins-caller/ca.crt"
+        params+=" --token=${{ inputs.jenkinsToken }}"
+        params+=" --url=${{ inputs.jenkinsURL }}"
+        params+=" --user=${{ inputs.jenkinsUser }}"
+        params+=" --password=${{ inputs.jenkinsPassword }}"
+        params+=" --job=${{ inputs.jenkinsJob }}"
+        params+=" --options=${{ inputs.jenkinsJobOptions }}"
+
+        docker run \
+        --rm \
+        --env CACERT="${{ inputs.caCert }}" \
+        --env CERT="${{ inputs.clientCert }}" \
+        --env KEY="${{ inputs.clientKey }}" \
+        eu.gcr.io/tradeshift-public/jenkins-caller:master "${params}"
