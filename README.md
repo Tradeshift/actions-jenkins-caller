@@ -1,32 +1,28 @@
 # actions-jenkins-caller
 
 #### About this project
-GH action for calling Jenkins jobs  
+
+GH action for calling Jenkins jobs
 
 #### Getting Started
-Tutorial on what it is needed for first execution, including softwares that must be pre-installed.
 
+```yaml
+on: pull_request
 
-
-#### How to contribute
-Provide a guideline on how to contribute on your component
-
-#### Running Locally
-How to run it locally
-
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - uses: tradeshift/actions-jenkins-caller@master
+        with:
+          caCert: ${{ secrets.CACERT }}
+          clientCert: ${{ secrets.CLIENTCERT }}
+          clientKey: ${{ secrets.CLIENTKEY }}
+          jenkinsURL: https://myjenkins.example
+          jenkinsJob: deploy-all-things
+          jenkinsToken: ${{ secrets.Jenkins_Token }}
+          jenkinsUser: ${{ secrets.Jenkins_User }}
+          jenkinsPassword: ${{ secrets.Jenkins_Password }}
+          jenkinsJobOptions: ${{ secrets.Jenkins_Options }}
 ```
-Command to start the component goes here
-```
-
-#### Running Tests
-Tests available and how run them
-
-### Consider also using additional elements such as: 
-
-- Table of contents
-- Illustrations
-- Scope of functionalities 
-- Examples of use
-- Project status 
-- Sources
-- Other information
