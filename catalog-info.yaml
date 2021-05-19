@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: actions-jenkins-caller
+  description: |
+    Github action for executing Jenkins jobs on a Jenkins server
+  annotations:
+    github.com/project-slug: Tradeshift/actions-jenkins-caller
+  tags:
+    - typescript
+    - github-action
+spec:
+  type: library
+  owner: developer-productivity
+  lifecycle: production
